@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="logo">
+    <p>RISOFLOR🌱AI</p> <span></span>
+  </div>
+  <div class="btn-menu" (click)="openCloseMenu()">
+    <i [ngClass]="menuAberto === true ? 'bi bi-x-lg' : 'bi bi-list'"></i>
+  </div>
+</header>
+
+<div class="chat-container">
+  <div *ngIf="historico.length === 0" class="initial">
+    <h3>Em que posso ajudar?</h3>
+  </div>
+  <div class="messages">
+    <div *ngFor="let msg of historico" [ngClass]="msg.role">
+      <pre class="bubble">{{ msg.content }}</pre>
+    </div>
+  </div>
+</div>
+<div class="input-area">
+  <input [(ngModel)]="mensagem" (keyup.enter)="enviarMensagem()" rows="1" placeholder="Digite sua mensagem...">
+  <button (click)="enviarMensagem()">
+    <i class="bi bi-send"></i>
+  </button>
+</div>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
