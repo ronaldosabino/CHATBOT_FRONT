@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ChatService {
-  private backendUrl = 'https://chatbot-back-7gik.onrender.com/'; // URL do backend FastAPI
+  private backendUrl = 'https://chatbot-back-7gik.onrender.com/chat'; // URL do backend FastAPI
 
   constructor(private http: HttpClient) {}
 
