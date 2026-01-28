@@ -6,7 +6,7 @@ import { HomeComponent } from './pages/home/components/home/home.component';
 
 @Component({
   selector: 'app-root',
-  imports: [HomeComponent, ChatComponent],
+  imports: [ChatComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

@@ -1,29 +1,43 @@
-<header class="header">
-  <div class="logo">
-    <p>RISOFLOR🌱AI</p> <span></span>
-  </div>
-  <div class="btn-menu" (click)="openCloseMenu()">
-    <i [ngClass]="menuAberto === true ? 'bi bi-x-lg' : 'bi bi-list'"></i>
-  </div>
-</header>
+<div class="chat-page">
 
-<div class="chat-container">
-  <div *ngIf="historico.length === 0" class="initial">
-    <h3>Em que posso ajudar?</h3>
-  </div>
-  <div class="messages">
-    <div *ngFor="let msg of historico" [ngClass]="msg.role">
-      <pre class="bubble">{{ msg.content }}</pre>
+  <!-- HEADER -->
+  <header class="chat-header">
+    <h1 class="chat-title">RISOFLOR🌱AI</h1>
+
+    <button class="menu-btn" (click)="openCloseMenu()">
+      <i class="bi" [ngClass]="menuAberto ? 'bi-x-lg' : 'bi-list'"></i>
+    </button>
+  </header>
+
+  <!-- CHAT BODY -->
+  <main class="chat-body">
+
+    <!-- Mensagem inicial -->
+    <div *ngIf="historico.length === 0" class="chat-empty">
+      <h3>Em que posso ajudar?</h3>
     </div>
-  </div>
-</div>
-<div class="input-area">
-  <input [(ngModel)]="mensagem" (keyup.enter)="enviarMensagem()" rows="1" placeholder="Digite sua mensagem...">
-  <button (click)="enviarMensagem()">
-    <i class="bi bi-send"></i>
-  </button>
-</div>
 
-<div class="spinner-container" *ngIf="isLoading">
-  <div class="spinner"></div>
+    <!-- Histórico -->
+    <div class="chat-messages">
+      <div *ngFor="let msg of historico" class="message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+        <p class="bubble">{{ msg.content }}</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- INPUT -->
+  <footer class="chat-input-area">
+    <textarea [(ngModel)]="mensagem" placeholder="Digite sua mensagem..." rows="1" class="chat-input"></textarea>
+
+    <button class="send-btn" (click)="enviarMensagem()" [disabled]="mensagem.trim() === ''">
+      <i class="bi bi-send-fill"></i>
+    </button>
+  </footer>
+
+  <!-- LOADING -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
 </div>
