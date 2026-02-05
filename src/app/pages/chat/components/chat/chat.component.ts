@@ -40,13 +40,30 @@ export class ChatComponent {
       (error) => {
         this.isLoading = false;
         console.error('Erro ao enviar mensagem:', error);
-      }
+      },
     );
 
     this.mensagem = '';
   }
 
   userScrolled: boolean = false; // Flag para monitorar se o usuário mexeu no scroll
+
+  // simularDigitacao(botMessage: any, resposta: string) {
+  //   let index = 0;
+  //   const intervalo = setInterval(() => {
+  //     if (index < resposta.length) {
+  //       botMessage.content += resposta[index];
+  //       index++;
+
+  //       // Atualiza a posição do scroll, mas apenas se o usuário não mexeu
+  //       if (!this.userScrolled) {
+  //         this.scrollToBottom();
+  //       }
+  //     } else {
+  //       clearInterval(intervalo);
+  //     }
+  //   }, 20);
+  // }
 
   simularDigitacao(botMessage: any, resposta: string) {
     let index = 0;
@@ -57,7 +74,12 @@ export class ChatComponent {
 
         // Atualiza a posição do scroll, mas apenas se o usuário não mexeu
         if (!this.userScrolled) {
-          this.scrollToBottom();
+          const messagesContainer = document.querySelector(
+            '.messages',
+          ) as HTMLElement;
+          if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          }
         }
       } else {
         clearInterval(intervalo);
@@ -67,7 +89,7 @@ export class ChatComponent {
 
   scrollToBottom() {
     const messagesContainer = document.querySelector(
-      '.messages'
+      '.messages',
     ) as HTMLElement;
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
@@ -75,7 +97,7 @@ export class ChatComponent {
   // Monitorar a interação do usuário com o scroll
   ngAfterViewInit() {
     const messagesContainer = document.querySelector(
-      '.messages'
+      '.messages',
     ) as HTMLElement;
     messagesContainer.addEventListener('scroll', () => {
       const nearBottom =
@@ -90,6 +112,18 @@ export class ChatComponent {
       this.menuAberto = false;
     } else {
       this.menuAberto = true;
+    }
+  }
+
+  keypressEnter(event: any) {
+    if (event.keyCode === 13) {
+      if (event.ctrlKey || event.shiftKey) {
+        event.preventDefault();
+        this.mensagem += '\n';
+      } else {
+        // Chame o método desejado aqui
+        this.enviarMensagem();
+      }
     }
   }
 }

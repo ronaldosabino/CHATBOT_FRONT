@@ -28,7 +28,7 @@
 
   <!-- INPUT -->
   <footer class="chat-input-area">
-    <textarea [(ngModel)]="mensagem" placeholder="Digite sua mensagem..." rows="1" class="chat-input"></textarea>
+    <textarea [(ngModel)]="mensagem" placeholder="Digite sua mensagem..." rows="1" class="chat-input" (keydown)="keypressEnter($event)"></textarea>
 
     <button class="send-btn" (click)="enviarMensagem()" [disabled]="mensagem.trim() === ''">
       <i class="bi bi-send-fill"></i>
