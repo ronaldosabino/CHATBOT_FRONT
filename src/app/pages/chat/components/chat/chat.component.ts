@@ -125,6 +125,7 @@ export class ChatComponent {
       } else {
         // Chame o método desejado aqui
         this.enviarMensagem();
+        event.preventDefault();
       }
     }
   }
