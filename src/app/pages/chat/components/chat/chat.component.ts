@@ -95,18 +95,6 @@ export class ChatComponent {
   }
 
   // Monitorar a interação do usuário com o scroll
-  // ngAfterViewInit() {
-  //   const messagesContainer = document.querySelector(
-  //     '.messages',
-  //   ) as HTMLElement;
-  //   messagesContainer.addEventListener('scroll', () => {
-  //     const nearBottom =
-  //       messagesContainer.scrollHeight - messagesContainer.scrollTop <=
-  //       messagesContainer.clientHeight + 10;
-  //     this.userScrolled = !nearBottom;
-  //   });
-  // }
-
   ngAfterViewInit() {
     const messagesContainer = document.querySelector(
       '.messages',
@@ -118,8 +106,6 @@ export class ChatComponent {
           messagesContainer.clientHeight + 10;
         this.userScrolled = !nearBottom;
       });
-    } else {
-      console.error('Elemento com classe .messages não encontrado');
     }
   }
 
